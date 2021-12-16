@@ -1,4 +1,4 @@
-# A Simple and Elegant zsh (Z Shell) Theme
+# A Simple and Elegant zsh Theme
 Includes a colourized timestamp, user, hostname, and elevated root theme.
 
 1. Clone repo: `git clone https://github.com/sflems/piboy-zsh-theme.git && cd piboy-zsh-theme/`
