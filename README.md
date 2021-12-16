@@ -8,4 +8,8 @@ Includes a colourized timestamp, user, hostname, and elevated root theme.
 5. Login, open a terminal and select option `0` to shut the zsh test function up.
 
 Enjoy!
-##### Tested on Ubuntu 20.04.3 with zsh 5.8.
+
+Have a project to work on? Shoot me a message: [scott@piboy.ca](mailto:scott@piboy.ca).
+
+###### Copyright &copy; 2021 Piboy Technical Solutions Ltd. All rights reserved.
+###### Tested on Ubuntu 20.04.3 with zsh 5.8.
