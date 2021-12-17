@@ -111,5 +111,12 @@ if grep -q '^ID.*=.*ubuntu' /etc/os-release && [[ -z "$skip_global_compinit" ]];
   compinit
 fi
 
+# Save zsh history
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory
+
+# Promt theme
 TERM=xterm-256color
 PROMPT='%(#.[%F{47} %T %f]'$'\U2192'' %F{167}!%f%F{white}%n%f%F{167}!%f@%F{167}%m%f:%F{30}%~%f$ .[%F{47} %T %f]'$'\U2192'' %F{167}%n%f@%F{167}%m%f:%F{30}%~%f$ '
