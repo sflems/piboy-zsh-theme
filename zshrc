@@ -111,12 +111,20 @@ if grep -q '^ID.*=.*ubuntu' /etc/os-release && [[ -z "$skip_global_compinit" ]];
   compinit
 fi
 
+# Git integration
+autoload -Uz vcs_info
+precmd_vcs_info() { vcs_info }
+precmd_functions+=( precmd_vcs_info )
+setopt prompt_subst
+
+zstyle ':vcs_info:git:*' formats '%F{black} %s: (%b) %r%f '
+zstyle ':vcs_info:*' enable git
+
 # Save zsh history
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory
 
-# Promt theme
 TERM=xterm-256color
-PROMPT='%(#.[%F{47} %T %f]'$'\U2192'' %F{167}!%f%F{white}%n%f%F{167}!%f@%F{167}%m%f:%F{30}%~%f$ .[%F{47} %T %f]'$'\U2192'' %F{167}%n%f@%F{167}%m%f:%F{30}%~%f$ '
+PROMPT=''$'\n''[%F{47} %T %f]%(?.%F{green}√.%F{red}X)%f'$'\U2192'' %(#.%F{167}!%f%F{white}%n%f%F{167}!%f.%F{167}%n%f)@%F{167}%m%f:%F{30}%~%F{30}%S'$'\ue0b0''%s%K{30}${vcs_info_msg_0_}%k%F{30}'$'\ue0b0''%f '$'\n''%(#.#.$) '
