@@ -99,7 +99,7 @@ configure_prompt() {
     [ "$EUID" -eq 0 ] && prompt_symbol=💀
     case "$PROMPT_ALTERNATIVE" in
         twoline)
-            PROMPT=$'┌──%B${debian_chroot:+($debian_chroot)─}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))─}[%F{47} %T %f] %(?.%F{green}√.%F{red}X) %f'$'\U2192'' %(#.%F{167}!%F{white}%n%F{167}!.%F{167}%n)%f@%F{167}%m%f:%F{30}%~%b%S'$'\ue0b0''%s%f%K{30}%F{16} ${vcs_info_msg_0_}%k%f%F{30}'$'\ue0b0''%f'$'\n''└─%B%(#.%F{red}#.%F{30}$)%b%f%F{reset} '
+            PROMPT=$'┌──%B${debian_chroot:+($debian_chroot)─}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))─}[%F{47} %T %f] %(?.%F{green}√.%F{red}X) %f'$'\U2192'' %(#.%F{167}!%F{white}%n%F{167}!.%F{167}%n)%f@%F{167}%m%f:%F{30}%~%b%S'$'\ue0b0''%s%f${vcs_info_msg_0_}%F{30}'$'\ue0b0''%f'$'\n''└─%B%(#.%F{red}#.%F{30}$)%b%f%F{reset} '
             RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
             ;;
         oneline)
@@ -258,5 +258,5 @@ if [ -f /etc/zsh_command_not_found ]; then
 fi
 
 # Git info styles
-zstyle ':vcs_info:git:*' formats '%F{16}%s: (%b) %r%f '
+zstyle ':vcs_info:git:*' formats '%K{30}%F{16} %s: (%b) %r%f %k'
 zstyle ':vcs_info:*' enable git
