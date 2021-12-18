@@ -14,7 +14,7 @@ Enjoy!
 
 Have a project to work on? Shoot me a message: [scott@piboy.ca](mailto:scott@piboy.ca).
 
-###### Copyright &copy; 2021 Piboy Technical Solutions Ltd. All rights reserved.
+###### Copyright &copy; 2021 Piboy Technical Solutions Ltd.
 ###### Tested on Ubuntu 20.04.3 with zsh 5.8.
 
 <img src="/assets/screenshot.png" alt="Piboy zsh Theme Screenshot" width="100%"/>
