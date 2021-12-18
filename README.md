@@ -2,7 +2,7 @@
 Includes a colourized timestamp, user, hostname, Kali styled syntax highlighting, github VCS info, and elevated root theme.
 
 1. Clone repo: `git clone https://github.com/sflems/piboy-zsh-theme.git && cd piboy-zsh-theme/`
-2. Install zsh: `sudo apt install zsh -y`
+2. Install zsh & powerline fonts: `sudo apt install zsh powerline -y`
 3. Configure zsh as default shell for your user and root: `chsh -s /usr/bin/zsh && sudo bash -c 'chsh -s /usr/bin/zsh'`
   - Optionally: Configure additional users to use `zsh`: `sudo -u $USERNAME chsh -s /usr/bin/zsh`
   - Optionally: Configure all new users to have `zsh` as default shell: `sudo sed -i 's@SHELL=.*@SHELL=/bin/zsh@g' /etc/default/useradd`
