@@ -4,10 +4,15 @@ Includes a colourized timestamp, user, hostname, Kali styled syntax highlighting
 
 1. Install `zsh` & [Powerline fonts](https://gist.github.com/qrush/1595572): `sudo apt install zsh powerline -y`
 2. Install `oh-my-zsh`:
-
-```sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"```
+  ```
+  sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  sudo su
+  sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  exit
+  ```
+  
 3. Clone repo: `git clone https://github.com/sflems/piboy-zsh-theme.git && cd piboy-zsh-theme/`
-4. Activate theme with `./install.sh`
+4. Activate theme with `./install.sh && sudo ./install.sh`
 5. Reload your terminal.
 
 Enjoy!
