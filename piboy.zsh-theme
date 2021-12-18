@@ -1,5 +1,11 @@
 # ~/.zshrc file for zsh interactive shells.
-# see /usr/share/doc/zsh/examples/zshrc for examples
+
+# An elegant and simply multi-line theme for ZSH inspired by kali theme.
+# Features: root customization, timestamp and git integration.
+# By Piboy Technical Solutions Ltd.
+
+# In order for this theme to render correctly, you will need a
+# [Powerline-patched font](https://gist.github.com/1595572).
 
 setopt autocd              # change directory just by typing its name
 setopt correct             # auto correct mistakes
@@ -44,10 +50,6 @@ zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p
 zstyle ':completion:*' use-compctl false
 zstyle ':completion:*' verbose true
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
-
-# Git integration
-autoload -Uz vcs_info
-setopt prompt_subst
 
 # History configurations
 HISTFILE=~/.zsh_history
@@ -94,38 +96,7 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-configure_prompt() {
-    prompt_symbol=㉿
-    [ "$EUID" -eq 0 ] && prompt_symbol=💀
-    case "$PROMPT_ALTERNATIVE" in
-        twoline)
-            PROMPT=$'┌──%B${debian_chroot:+($debian_chroot)─}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))─}[%F{47} %T %f] %(?.%F{green}√.%F{red}X) %f'$'\U2192'' %(#.%F{167}!%F{white}%n%F{167}!.%F{167}%n)%f@%F{167}%m%f:%F{30}%~%b%S'$'\ue0b0''%s%f${vcs_info_msg_0_}%F{30}'$'\ue0b0''%f'$'\n''└─%B%(#.%F{red}#.%F{30}$)%b%f%F{reset} '
-            RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
-            ;;
-        oneline)
-            PROMPT=$'${debian_chroot:+($debian_chroot)}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}%B%F{%(#.red.blue)}%n@%m%b%F{reset}:%B%F{%(#.blue.green)}%~%b%F{reset}%(#.#.$) '
-            RPROMPT=
-            ;;
-        backtrack)
-            PROMPT=$'${debian_chroot:+($debian_chroot)}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}%B%F{red}%n@%m%b%F{reset}:%B%F{blue}%~%b%F{reset}%(#.#.$) '
-            RPROMPT=
-            ;;
-    esac
-}
-
-# The following block is surrounded by two delimiters.
-# These delimiters must not be modified. Thanks.
-# START KALI CONFIG VARIABLES
-PROMPT_ALTERNATIVE=twoline
-NEWLINE_BEFORE_PROMPT=yes
-# STOP KALI CONFIG VARIABLES
-
 if [ "$color_prompt" = yes ]; then
-    # override default virtualenv indicator in prompt
-    VIRTUAL_ENV_DISABLE_PROMPT=1
-
-    configure_prompt
-
     # enable syntax-highlighting
     if [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && [ "$color_prompt" = yes ]; then
         . /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -177,18 +148,6 @@ else
 fi
 unset color_prompt force_color_prompt
 
-toggle_oneline_prompt(){
-    if [ "$PROMPT_ALTERNATIVE" = oneline ]; then
-        PROMPT_ALTERNATIVE=twoline
-    else
-        PROMPT_ALTERNATIVE=oneline
-    fi
-    configure_prompt
-    zle reset-prompt
-}
-zle -N toggle_oneline_prompt
-bindkey ^P toggle_oneline_prompt
-
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*|Eterm|aterm|kterm|gnome*|alacritty)
@@ -197,22 +156,6 @@ xterm*|rxvt*|Eterm|aterm|kterm|gnome*|alacritty)
 *)
     ;;
 esac
-
-precmd() {
-    # Print the previously configured title
-    print -Pnr -- "$TERM_TITLE"
-
-    # Print a new line before the prompt, but only if it is not the first line
-    if [ "$NEWLINE_BEFORE_PROMPT" = yes ]; then
-        if [ -z "$_NEW_LINE_BEFORE_PROMPT" ]; then
-            _NEW_LINE_BEFORE_PROMPT=1
-        else
-            print ""
-        fi
-    fi
-
-    vcs_info
-}
 
 # enable color support of ls, less and man, and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -257,6 +200,20 @@ if [ -f /etc/zsh_command_not_found ]; then
     . /etc/zsh_command_not_found
 fi
 
+# Git and VCS status
+autoload -Uz add-zsh-hook vcs_info
+setopt prompt_subst
+add-zsh-hook precmd vcs_info
+
+if [ $UID -eq 0 ]; then  prompt_symbol=💀; else prompt_symbol=⚙; fi
+PROMPT=$'┌─%B${debian_chroot:+($debian_chroot)─}%F{30}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}%f%b─[%B%F{47} %T %f%b]%B %(?.%F{34}√ .%F{red}X )%f'$'\U2192'' %(#.%F{167}!%f%n%F{167}!.%F{167}%n)%f@%F{167}%m%f:%F{30}%2~%b%S⮀%s%f${vcs_info_msg_0_}%F{30}⮀%f '$'\n''└─%B%(#. ${prompt_symbol}.%F{30}${prompt_symbol})%f%b%F{reset} '
+RPROMPT=
+# RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
+
 # Git info styles
-zstyle ':vcs_info:git:*' formats '%K{30}%F{16} %s: (%b) %r%f %k'
-zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' unstagedstr '%B%F{red}*%f%b'   # display this when there are unstaged changes
+zstyle ':vcs_info:*' stagedstr '%B%F{47}+%f%b'  # display this when there are staged changes
+zstyle ':vcs_info:git:*' formats '%K{30}%F{16} '$'\ue0a0''%b%u%c%f %k'
+zstyle ':vcs_info:git:*' actionformats '(%b|%a%u%c)'
+zstyle ':vcs_info:*' enable git cvs svn

@@ -1,20 +1,20 @@
 # A Simple and Elegant zsh Theme
+
 Includes a colourized timestamp, user, hostname, Kali styled syntax highlighting, github VCS info, and elevated root theme.
 
-1. Clone repo: `git clone https://github.com/sflems/piboy-zsh-theme.git && cd piboy-zsh-theme/`
-2. Install zsh & powerline fonts: `sudo apt install zsh powerline -y`
-3. Configure zsh as default shell for your user and root: `chsh -s /usr/bin/zsh && sudo bash -c 'chsh -s /usr/bin/zsh'`
-  - Optionally: Configure additional users to use `zsh`: `sudo -u $USERNAME chsh -s /usr/bin/zsh`
-  - Optionally: Configure all new users to have `zsh` as default shell: `sudo sed -i 's@SHELL=.*@SHELL=/bin/zsh@g' /etc/default/useradd`
-5. Copy contents to each user's `~/.zshrc`: `sudo bash -c 'cat ./zshrc > ~/.zshrc' && sudo bash -c 'cat ./zshrc > /root/.zshrc`
-6. Logout of all sessions.
-7. Login, open a terminal and select option `0` to shut the zsh test function up.
+1. Install `zsh` & [Powerline fonts](https://gist.github.com/qrush/1595572): `sudo apt install zsh powerline -y`
+2. Install `oh-my-zsh`:
+```sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"```
+3. Clone repo: `git clone https://github.com/sflems/piboy-zsh-theme.git && cd piboy-zsh-theme/`
+4. Activate theme with `./install.sh`
+5. Reload your terminal.
 
 Enjoy!
 
 Have a project to work on? Shoot me a message: [scott@piboy.ca](mailto:scott@piboy.ca).
 
 ###### Copyright &copy; 2021 Piboy Technical Solutions Ltd.
+
 ###### Tested on Ubuntu 20.04.3 with zsh 5.8.
 
 <img src="/assets/screenshot.png" alt="Piboy zsh Theme Screenshot" width="100%"/>
