@@ -206,7 +206,7 @@ setopt prompt_subst
 add-zsh-hook precmd vcs_info
 
 if [ $UID -eq 0 ]; then  prompt_symbol=💀; else prompt_symbol=⚙; fi
-PROMPT=$'┌─%B${debian_chroot:+($debian_chroot)─}%F{30}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}%f%b─[%B%F{47} %T %f%b]%B %(?.%F{34}√ .%F{red}X )%f'$'\U2192'' %(#.%F{167}!%f%n%F{167}!.%F{167}%n)%f@%F{167}%m%f:%F{30}%2~%b%S⮀%s%f${vcs_info_msg_0_}%F{30}⮀%f '$'\n''└─%B%(#. ${prompt_symbol}.%F{30}${prompt_symbol})%f%b%F{reset} '
+PROMPT=$'┌─%B${debian_chroot:+($debian_chroot)─}%F{30}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}%f%b─[%B%F{47} %T %f%b]%B %(?.%F{34}√ .%F{red}X )%f'$'\U2192'' %(#.%F{167}!%f%n%F{167}!.%F{167}%n)%f@%F{167}%m%f:%F{30}%2~%b%S⮀%s%f${vcs_info_msg_0_}${git_prompt_status}%F{30}⮀%f '$'\n''└─%B%(#. ${prompt_symbol}.%F{30}${prompt_symbol})%f%b%F{reset} '
 RPROMPT=
 # RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
 
