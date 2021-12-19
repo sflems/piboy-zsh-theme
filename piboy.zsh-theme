@@ -230,14 +230,9 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
 }
 
 # is branch ahead?
-if $(echo "$(git log origin/$(git_current_branch)..HEAD 2> /dev/null)" | grep '^commit' &> /dev/null); then
-  ZSH_THEME_GIT_PROMPT_AHEAD='%B%F{214}'$'\u25B2''%f%b'
-fi
-
+ZSH_THEME_GIT_PROMPT_AHEAD='%B%F{214}'$'\u25B2''%f%b'
 # is branch behind?
-if $(echo "$(git log HEAD..origin/$(git_current_branch) 2> /dev/null)" | grep '^commit' &> /dev/null); then
-  ZSH_THEME_GIT_PROMPT_BEHIND='%B%F{214}}'$'\u25BC''%f%b'
-fi
+ZSH_THEME_GIT_PROMPT_BEHIND='%B%F{214}}'$'\u25BC''%f%b'
 
 zstyle ':vcs_info:git:*' formats '%K{30}%F{16} '$'\ue0a0''%b%u%c%f %k'
 zstyle ':vcs_info:git:*' actionformats '(%b|%a%u%c)'
