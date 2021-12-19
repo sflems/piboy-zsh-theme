@@ -213,7 +213,7 @@ RPROMPT=
 # Git info styles
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' unstagedstr '%B%F{red}*%f%b'   # display this when there are unstaged changes
-zstyle ':vcs_info:*' stagedstr '%B%F{184}+%f%b'  # display this when there are staged changes
+zstyle ':vcs_info:*' stagedstr '%B%F{47}+%f%b'  # display this when there are staged changes
 zstyle ':vcs_info:git:*' formats '%K{30}%F{16} '$'\ue0a0''%b%u%c%m%f %k'
 zstyle ':vcs_info:git:*' actionformats '(%b|%a%u%c%m)'
 zstyle ':vcs_info:*' enable git cvs svn
@@ -248,8 +248,8 @@ function +vi-git-st() {
     ahead=${ahead_and_behind[1]}
     behind=${ahead_and_behind[2]}
 
-    (( $ahead )) && gitstatus+=( "%F{47}${ahead}↑%f")
-    (( $behind )) && gitstatus+=( "%F{red}${behind}↓%f")
+    (( $ahead )) && gitstatus+=( "%F{47} ${ahead}↑%f")
+    (( $behind )) && gitstatus+=( "%F{red} ${behind}↓%f")
 
     hook_com[misc]+=${(j:/:)gitstatus}
 }
