@@ -212,7 +212,7 @@ RPROMPT=
 
 # Git info styles
 zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' unstagedstr '%B%F{red}*%f%b'   # display this when there are unstaged changes
+zstyle ':vcs_info:*' unstagedstr '%B%F{172}*%f%b'   # display this when there are unstaged changes
 zstyle ':vcs_info:*' stagedstr '%B%F{47}+%f%b'  # display this when there are staged changes
 zstyle ':vcs_info:git:*' formats '%K{30}%F{16} '$'\ue0a0''%b%u%c%m%f %k'
 zstyle ':vcs_info:git:*' actionformats '(%b|%a%u%c%m)'
