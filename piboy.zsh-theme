@@ -214,6 +214,21 @@ RPROMPT=
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' unstagedstr '%B%F{red}*%f%b'   # display this when there are unstaged changes
 zstyle ':vcs_info:*' stagedstr '%B%F{47}+%f%b'  # display this when there are staged changes
+
+### git: Show marker (T) if there are untracked files in repository
+# Make sure you have added staged to your 'formats':  %c
+zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
++vi-git-untracked(){
+    if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
+        git status --porcelain | grep '??' &> /dev/null ; then
+        # This will show the marker if there are any untracked files in repo.
+        # If instead you want to show the marker only if there are untracked
+        # files in $PWD, use:
+        #[[ -n $(git ls-files --others --exclude-standard) ]] ; then
+        hook_com[staged]+='%B%F{214}T%f%b'
+    fi
+}
+
 zstyle ':vcs_info:git:*' formats '%K{30}%F{16} '$'\ue0a0''%b%u%c%f %k'
 zstyle ':vcs_info:git:*' actionformats '(%b|%a%u%c)'
 zstyle ':vcs_info:*' enable git cvs svn
