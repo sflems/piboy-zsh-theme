@@ -213,7 +213,7 @@ RPROMPT=
 # Git info styles
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' unstagedstr '%B%F{red}*%f%b'   # display this when there are unstaged changes
-zstyle ':vcs_info:*' stagedstr '%B%F{47}+%f%b'  # display this when there are staged changes
+zstyle ':vcs_info:*' stagedstr '%B%F{184}+%f%b'  # display this when there are staged changes
 
 ### git: Show marker (T) if there are untracked files in repository
 # Make sure you have added staged to your 'formats':  %c
@@ -228,12 +228,6 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
         hook_com[staged]+='%B%F{214}T%f%b'
     fi
 }
-
-# is branch ahead?
-ZSH_THEME_GIT_PROMPT_AHEAD="{$FG[214]%}'$'\u25B2''"
-# is branch behind?
-ZSH_THEME_GIT_PROMPT_BEHIND="{$FG[214]%}'$'\u25BC''"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 
 zstyle ':vcs_info:git:*' formats '%K{30}%F{16} '$'\ue0a0''%b%u%c%m%f %k'
 zstyle ':vcs_info:git:*' actionformats '(%b|%a%u%c%m)'
@@ -256,8 +250,8 @@ function +vi-git-st() {
     ahead=${ahead_and_behind[1]}
     behind=${ahead_and_behind[2]}
 
-    (( $ahead )) && gitstatus+=( "+${ahead}" )
-    (( $behind )) && gitstatus+=( "-${behind}" )
+    (( $ahead )) && gitstatus+=( "%F{47}↑ ${ahead}%f")
+    (( $behind )) && gitstatus+=( "%F{red}↓ ${behind}%f")
 
     hook_com[misc]+=${(j:/:)gitstatus}
 }
