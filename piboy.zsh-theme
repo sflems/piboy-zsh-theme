@@ -206,7 +206,7 @@ setopt prompt_subst
 add-zsh-hook precmd vcs_info
 
 if [ $UID -eq 0 ]; then  prompt_symbol=💀; else prompt_symbol=⚙; fi
-PROMPT=$'┌─%B${debian_chroot:+($debian_chroot)─}%F{30}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}%f%b─[%B%F{47} %T %f%b]%B %(?.%F{34}√ .%F{red}X )%f'$'\U2192'' %(#.%F{167}!%f%n%F{167}!.%F{167}%n)%f@%F{167}%m%f:%F{30}%2~%b%S⮀%s%f${vcs_info_msg_0_}${git_prompt_status}%F{30}⮀%f '$'\n''└─%B%(#. ${prompt_symbol}.%F{30}${prompt_symbol})%f%b%{$reset_color%} '
+PROMPT=$'┌─%B${debian_chroot:+($debian_chroot)─}%F{30}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}%f%b─[%B%F{47} %T %f%b]%B %(?.%F{34}√ .%F{red}X )%f'$'\U2192'' %(#.%F{167}!%f%n%F{167}!.%F{167}%n)%f@%F{167}%m%f:%F{30}%2~%b%S⮀%s%f${vcs_info_msg_0_}%F{30}⮀%f '$'\n''└─%B%(#. ${prompt_symbol}.%F{30}${prompt_symbol})%f%b%{$reset_color%} '
 RPROMPT=
 # RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
 
@@ -235,8 +235,8 @@ ZSH_THEME_GIT_PROMPT_AHEAD="{$FG[214]%}'$'\u25B2''"
 ZSH_THEME_GIT_PROMPT_BEHIND="{$FG[214]%}'$'\u25BC''"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 
-zstyle ':vcs_info:git:*' formats '%K{30}%F{16} '$'\ue0a0''%b%u%c%f %k'
-zstyle ':vcs_info:git:*' actionformats '(%b|%a%u%c)'
+zstyle ':vcs_info:git:*' formats '%K{30}%F{16} '$'\ue0a0''%b%u%c%m%f %k'
+zstyle ':vcs_info:git:*' actionformats '(%b|%a%u%c%m)'
 zstyle ':vcs_info:*' enable git cvs svn
 
 # Must run vcs_info when changing directories.
