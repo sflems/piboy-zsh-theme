@@ -151,7 +151,7 @@ unset color_prompt force_color_prompt
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*|Eterm|aterm|kterm|gnome*|alacritty)
-    TERM_TITLE=$'\e]0;${debian_chroot:+($debian_chroot)}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}%n@%m: %~\a'
+TERM_TITLE=$'\e]0;${debian_chroot:+($debian_chroot)}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}%n@%m: %~\a'
     ;;
 *)
     ;;
@@ -205,8 +205,17 @@ autoload -Uz add-zsh-hook vcs_info
 setopt prompt_subst
 add-zsh-hook precmd vcs_info
 
+# Set hostname to yellow for ssh connections
+local host_color=167
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+  local host_color=220
+fi
+
+# Disable default venv prompt
+export VIRTUAL_ENV_DISABLE_PROMPT=yes
+
 if [ $UID -eq 0 ]; then  prompt_symbol=💀; else prompt_symbol=⚙; fi
-PROMPT=$'┌─%B${debian_chroot:+($debian_chroot)─}%F{30}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}%f%b─[%B%F{47} %T %f%b]%B %(?.%F{34}√ .%F{red}X )%f'$'\U2192'' %(#.%F{167}!%f%n%F{167}!.%F{167}%n)%f@%F{167}%m%f:%F{30}%2~%b%S'$'\ue0b0''%s%f${vcs_info_msg_0_}%F{30}'$'\ue0b0''%f '$'\n''└─%B%(#. ${prompt_symbol}.%F{30}${prompt_symbol})%f%b%{$reset_color%} '
+PROMPT=$'┌─%B${debian_chroot:+($debian_chroot)─}%F{30}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))}%f%b─[%B%F{47} %T %f%b]%B %(?.%F{34}√ .%F{red}X )%f'$'\U2192'' %F{$host_color}%(#.%F{167}!%f%n%f%F{167}!.%n)%f@%F{167}%m%f:%F{30}%2~%b%S'$'\ue0b0''%s%f${vcs_info_msg_0_}%F{30}'$'\ue0b0''%f '$'\n''└─%B%(#. ${prompt_symbol}.%F{30}${prompt_symbol})%f%b%{$reset_color%} '
 RPROMPT=
 # RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
 
