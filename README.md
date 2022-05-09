@@ -2,7 +2,7 @@
 
 A simple and elegant multi-line theme for ZSH. Includes a colourized timestamp, user, hostname, Kali styled syntax highlighting, github/VCS info, and elevated root theme. 
 
-1. Install `zsh` & [Powerline fonts](https://github.com/powerline/fonts): `sudo apt install zsh powerline -y`
+1. Install `zsh` & [Powerline fonts](https://github.com/powerline/fonts/blob/master/UbuntuMono/Ubuntu%20Mono%20derivative%20Powerline.ttf): `sudo apt install zsh powerline -y`
 2. Install `oh-my-zsh`:
   ```
   sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
